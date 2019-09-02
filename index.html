@@ -8,12 +8,48 @@
 <h1>This is a Heading</h1>
 <p>This is a paragraph.</p>
 
+<input id = "lastname" type = "text"/>
+<input id = "company" type = "text"/>
+
 <iframe src="http://alex-vishneuski-developer-edition.ap4.force.com/" title="Salesforce Sites Iframe" width="50%" height="300"> 
 
     <p>Your browser does not support iframes.</p>
 
 </iframe>
 
+<script>
+
+    function createLead() { 
+
+        const data = JSON.stringify({
+
+            "lastname": document.getElementById("lastname").value,
+
+           "company": document.getElementById("company").value
+
+        });
+
+        const url = "https://senla-portal.secure.force.com/portal/services/apexrest/newlead";
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("readystatechange", function () {
+
+            // TODO handle response    
+
+        });
+
+        xhr.open("POST", url, true); 
+
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+
+        xhr.setRequestHeader("accept", "application/json");
+
+        xhr.send(data);
+
+    }
+
+</script>
 
 </body>
 </html>
