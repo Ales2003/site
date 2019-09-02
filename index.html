@@ -27,6 +27,14 @@
 
 </iframe>
 
+<form>
+      First name:<br>
+      <input id = "lastname1" type="text" name="lastname"><br>
+      Last name:<br>
+      <input id = "company1" type="text" name="company">
+      <input type="button1" value="Create Lead" onclick="createLead1();"/> 
+    </form>
+
 <script>
 
     function createLead() { 
@@ -36,6 +44,39 @@
            "lastname": document.getElementById("lastname").value,
 
            "company": document.getElementById("company").value
+
+        });
+
+        const url = "http://alex-vishneuski-developer-edition.ap4.force.com/services/apexrest/newlead";
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+            if (xhr.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); // Например, 404: Not Found
+            } else { // если всё прошло гладко, выводим результат
+                alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
+            }
+        };
+
+        xhr.open("POST", url, true); 
+
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+
+        xhr.setRequestHeader("accept", "application/json");
+
+        xhr.send(data);
+
+    }
+
+
+function createLead1() { 
+
+        const data = JSON.stringify({
+
+           "lastname": document.getElementById("lastname1").value,
+
+           "company": document.getElementById("company1").value
 
         });
 
